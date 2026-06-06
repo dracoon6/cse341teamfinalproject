@@ -5,7 +5,7 @@ const doc = {
     title: 'College Catalog API',
     description: 'API for managing college courses and instructors',
   },
-  host: 'https://cse341teamfinalproject.onrender.com', // Replace with your actual Render URL
+  host: 'cse341teamfinalproject.onrender.com', // Replace with your actual Render URL
   schemes: ['https'],
 };
 

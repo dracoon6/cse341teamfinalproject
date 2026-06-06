@@ -5,7 +5,7 @@
     "description": "API for managing college courses and instructors",
     "version": "1.0.0"
   },
-  "host": "https://cse341teamfinalproject.onrender.com",
+  "host": "cse341teamfinalproject.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
