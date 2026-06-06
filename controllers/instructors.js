@@ -1,4 +1,4 @@
-const Instructor = require('../models/Instructor');
+const Instructor = require('../db/instructor');
 const mongoose = require('mongoose');
 
 const getAll = async (req, res) => {
