@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -9,25 +9,43 @@ const isAuthenticated = (req, res, next) => {
   res.status(401).json({ message: "Unauthorized. Please login." });
 };
 
-router.use('/', require('./swagger'));
-router.use('/courses', isAuthenticated, require('./courses'));
-router.use('/instructors', isAuthenticated, require('./instructors'));
+router.use("/", require("./swagger"));
+router.use("/courses", isAuthenticated, require("./courses"));
+router.use("/instructors", isAuthenticated, require("./instructors"));
+router.use("/departments", isAuthenticated, require("./departments"));
+router.use("/users", isAuthenticated, require("./users"));
 
-router.get('/login', passport.authenticate('github', { scope: ['user:email'] }));
+router.get(
+  "/login",
+  passport.authenticate("github", { scope: ["user:email"] }),
+);
 
-router.get('/logout', function (req, res, next) {
+router.get("/logout", function (req, res, next) {
   req.logout(function (err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
   });
 });
 
-router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/api-docs', session: true }),
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/api-docs",
+    session: true,
+  }),
   (req, res) => {
-    res.redirect('/');
-  }
+    res.redirect("/");
+  },
 );
 
-router.get('/', (req, res) => { res.send(req.user ? `Logged in as ${req.user.displayName || req.user.username}` : "Logged Out"); });
+router.get("/", (req, res) => {
+  res.send(
+    req.user
+      ? `Logged in as ${req.user.displayName || req.user.username}`
+      : "Logged Out",
+  );
+});
 
 module.exports = router;
